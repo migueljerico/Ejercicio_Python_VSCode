@@ -1,28 +1,68 @@
-# Práctica 3.2: Primeros pasos con Python y Visual Studio Code (INAEM)
+# 📊 Práctica 3.2: Análisis de Datos y ML con Python en VS Code
 
-## 📋 Resumen
-Este documento describe una práctica de Python centrada en la manipulación y análisis de datos. Incluye la gestión de un DataFrame de clientes con `pandas`, el entrenamiento de un modelo de regresión lineal para predecir precios de viviendas con `scikit-learn` y la generación de una visualización con `matplotlib`, todo ello ejecutado en Visual Studio Code.
+![Python](https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=white) ![Pandas](https://img.shields.io/badge/Pandas-150458?style=for-the-badge&logo=pandas&logoColor=white) ![Scikit-learn](https://img.shields.io/badge/scikit--learn-F7931E?style=for-the-badge&logo=scikit-learn&logoColor=white) ![Matplotlib](https://img.shields.io/badge/Matplotlib-11557C?style=for-the-badge&logo=matplotlib&logoColor=white) ![Estado](https://img.shields.io/badge/Estado-En%20desarrollo-blue.svg?style=for-the-badge) ![Licencia](https://img.shields.io/badge/Licencia-MIT-green.svg?style=for-the-badge)
 
-## 🔑 Puntos clave
-- **Manipulación de DataFrames:** Creación, adición, modificación y filtrado de datos de clientes usando `pandas`.
-- **Cálculo de estadísticos descriptivos:** Obtención de la edad y compra media de clientes.
-- **Modelo de Regresión Lineal:** Entrenamiento y uso de `scikit-learn` para predecir precios de viviendas.
-- **Visualización de Datos:** Generación de un gráfico de barras con `matplotlib` para las compras por cliente.
-- **Entorno de desarrollo:** La práctica se desarrolló y verificó en Visual Studio Code.
+*Una práctica formativa que explora la manipulación de datos con `pandas`, el entrenamiento de modelos de regresión lineal con `scikit-learn` y la visualización con `matplotlib` en Visual Studio Code.*
 
-## 📝 Detalle
 
-Esta práctica, realizada por Miguel Jericó como parte de su formación en "Análisis de Datos e IA" en el INAEM, aborda conceptos fundamentales de análisis de datos y machine learning en Python.
+## 🔗 Acceso / Demo
+Este proyecto es una práctica de código local en Python. Para ejecutarlo, sigue las instrucciones detalladas en las secciones de Instalación y Uso.
+
+## 📋 Descripción
+Este repositorio contiene el código de la Práctica 3.2, una iniciativa formativa del programa "Análisis de Datos e IA" del INAEM. El objetivo principal es familiarizar a los estudiantes con las herramientas fundamentales del ecosistema Python para el análisis de datos y el machine learning.
+
+La práctica se divide en dos bloques principales: primero, la manipulación de DataFrames de clientes utilizando la librería `pandas` para tareas como adición, modificación y filtrado de datos, junto con el cálculo de estadísticas descriptivas. Segundo, se aborda la implementación de un modelo de regresión lineal con `scikit-learn` para predecir precios de viviendas y la generación de visualizaciones de datos con `matplotlib`.
+
+Todo el desarrollo se ha realizado y verificado dentro del entorno de Visual Studio Code, sirviendo como una guía práctica para el manejo de proyectos de análisis de datos desde este popular IDE.
+
+## ✨ Funcionalidades
+| Funcionalidad                       | Descripción                                                                               |
+| :---------------------------------- | :---------------------------------------------------------------------------------------- |
+| Manipulación de DataFrames          | Crear, añadir, modificar y filtrar datos de clientes usando `pandas`.                     |
+| Cálculo de Estadísticos Descriptivos | Obtener la edad media y el volumen de compra medio de los clientes.                       |
+| Modelado de Regresión Lineal        | Entrenar y utilizar un modelo de `scikit-learn` para predecir precios de viviendas.       |
+| Visualización de Datos              | Generar gráficos de barras con `matplotlib` para representar las compras por cliente.     |
+| Gestión de Datos Inmobiliarios      | Añadir y reentrenar modelos predictivos con nuevos datos de viviendas para mejorar la precisión. |
+
+## ⚙️ Instalación
+Para poner en marcha el proyecto, sigue los siguientes pasos:
+
+1.  **Clonar el repositorio:**
+    ```bash
+    git clone https://github.com/migueljerico/Ejercicio_Python_VSCode.git
+    cd Ejercicio_Python_VSCode
+    ```
+
+2.  **Crear y activar un entorno virtual (recomendado):**
+    ```bash
+    python -m venv .venv
+    # En Windows:
+    .venv\Scripts\activate
+    # En macOS/Linux:
+    source .venv/bin/activate
+    ```
+
+3.  **Instalar las dependencias:**
+    ```bash
+    pip install pandas scikit-learn matplotlib
+    ```
+
+## 🚀 Uso
+El código de la práctica se encuentra en el archivo `practice_script.py`. Una vez instalado el entorno y las dependencias, puedes ejecutar los ejemplos directamente.
+
+Para ejecutar el script completo que incluye todas las operaciones descritas:
+```bash
+python practice_script.py
+```
+
+A continuación, se presentan los bloques de código y su funcionalidad:
 
 ### Bloque 1: Manipulación de Datos de Clientes con `pandas`
 
-Se inicia con un DataFrame de clientes y se realizan diversas operaciones para gestionar y analizar sus datos.
-
-#### 1. Añadir un quinto cliente al DataFrame
-Se crea un DataFrame inicial con cuatro clientes (Ana, Luis, Pedro, Marta) y sus respectivas edades y volúmenes de compra. Posteriormente, se añade un nuevo cliente, Elena, al DataFrame existente utilizando `pd.concat()`.
-
 ```python
 import pandas as pd
+
+print("=== Bloque 1: Manipulación de Datos de Clientes ===")
 
 datos = pd.DataFrame({
     "Nombre": ["Ana", "Luis", "Pedro", "Marta"],
@@ -30,46 +70,43 @@ datos = pd.DataFrame({
     "Compras": [120, 450, 380, 210]
 })
 
+print("DataFrame inicial de clientes:")
+print(datos)
+print("\n")
+
+# 1. Añadir un quinto cliente al DataFrame
 nuevo_cliente = pd.DataFrame({"Nombre": ["Elena"], "Edad": [45], "Compras": [500]})
 datos = pd.concat([datos, nuevo_cliente], ignore_index=True)
-```
+print("1. DataFrame con Elena añadida:")
+print(datos)
+print("\n")
 
-#### 2. Modificar las compras de Marta
-Se actualiza el registro de compras del cliente "Marta" de 210 a 600, utilizando el acceso por etiqueta `.loc` para una modificación selectiva.
-
-```python
+# 2. Modificar las compras de Marta
 datos.loc[datos["Nombre"] == "Marta", "Compras"] = 600
-```
+print("2. Compras de Marta modificadas a 600:")
+print(datos)
+print("\n")
 
-#### 3. Calcular la edad y la compra media
-Se calculan la edad media de todos los clientes y la compra media total, aplicando el método `.mean()` directamente sobre las columnas correspondientes del DataFrame.
-
-```python
-# Edad media
+# 3. Calcular la edad y la compra media
 edad_media = datos["Edad"].mean()
-
-# Compra media
 compra_media = datos["Compras"].mean()
-```
+print(f"3. Edad media de los clientes: {edad_media:.2f} años")
+print(f"   Compra media de los clientes: {compra_media:.2f} €")
+print("\n")
 
-#### 4. Filtrar clientes menores de 30 años
-Se muestran únicamente los clientes cuya edad es estrictamente inferior a 30 años, empleando indexación booleana para realizar el filtrado.
-
-```python
-print(" = = - Ejercicio 4: Clientes menores de 30 años = = -")
+# 4. Filtrar clientes menores de 30 años
+print("4. Clientes menores de 30 años:")
 print(datos[datos["Edad"] < 30])
 print("\n")
 ```
 
 ### Bloque 2: Análisis Predictivo de Viviendas con `scikit-learn` y Visualización con `matplotlib`
 
-Esta sección se enfoca en la implementación de un modelo de Machine Learning para la predicción de precios y la generación de un gráfico.
-
-#### 5. Añadir una nueva vivienda y reentrenar el modelo
-Se inicializa un DataFrame `datos_ml` con un conjunto de datos de viviendas que incluye metros cuadrados, número de habitaciones y precio. Se añade una novena vivienda (180 m², 5 habitaciones, 480.000€) al conjunto de entrenamiento y, posteriormente, se entrena un modelo de `LinearRegression` de `scikit-learn` con los datos actualizados.
-
 ```python
 from sklearn.linear_model import LinearRegression
+import matplotlib.pyplot as plt
+
+print("=== Bloque 2: Análisis Predictivo y Visualización ===")
 
 datos_ml = pd.DataFrame({
     "metros": [50, 60, 70, 80, 90, 100, 120, 150],
@@ -77,12 +114,12 @@ datos_ml = pd.DataFrame({
     "precio": [120000, 150000, 180000, 210000, 240000, 270000, 320000, 400000]
 })
 
+# 5. Añadir una nueva vivienda y reentrenar el modelo
 nueva_vivienda_entrenamiento = pd.DataFrame({
     "metros": [180],
     "habitaciones": [5],
     "precio": [480000]
 })
-
 datos_ml = pd.concat([datos_ml, nueva_vivienda_entrenamiento], ignore_index=True)
 
 X = datos_ml[["metros", "habitaciones"]]
@@ -90,34 +127,51 @@ y = datos_ml["precio"]
 
 modelo = LinearRegression()
 modelo.fit(X, y)
-```
 
-#### 6. Realizar una predicción y visualizar resultados
-Se utiliza el modelo de regresión lineal entrenado para predecir el precio de una vivienda de 110 m² y 4 habitaciones, mostrando el resultado estimado por consola. Además, se incluye la generación de un gráfico de barras con `matplotlib.pyplot` para visualizar las "Compras por cliente" del primer bloque de la práctica.
+print("5. Modelo de Regresión Lineal reentrenado.")
+print(f"   Coeficientes del modelo: {modelo.coef_}")
+print(f"   Intercepción del modelo: {modelo.intercept_:.2f}\n")
 
-```python
-import matplotlib.pyplot as plt
-
-vivienda_a_predecir = pd.DataFrame({
+# 6. Predecir el precio de una vivienda de 110 m2 y 3 habitaciones
+nueva_vivienda_prediccion = pd.DataFrame({
     "metros": [110],
-    "habitaciones": [4]
+    "habitaciones": [3]
 })
+precio_predicho = modelo.predict(nueva_vivienda_prediccion)[0]
 
-prediccion = modelo.predict(vivienda_a_predecir)
+print(f"6. Precio predicho para una vivienda de 110 m² y 3 habitaciones: {precio_predicho:.2f} €\n")
 
-print(" = = - Ejercicio 6: Predicción ML = = -")
-print(f"Precio estimado (110m², 4 habs): "
-      f"{str(round(prediccion[0], 2)).replace('.', ',')} €")
-
-# Gráfico de barras: compras por cliente
-plt.bar(datos["Nombre"], datos["Compras"])
-plt.title("Compras por cliente")
-plt.xlabel # Título del eje X (truncado en el documento original)
+# 7. Visualizar las compras por cliente
+# Reutilizamos el DataFrame 'datos' del bloque 1 para la visualización
+plt.figure(figsize=(10, 6))
+plt.bar(datos["Nombre"], datos["Compras"], color='skyblue')
+plt.xlabel("Cliente")
+plt.ylabel("Volumen de Compras (€)")
+plt.title("7. Volumen de Compras por Cliente")
+plt.grid(axis='y', linestyle='--', alpha=0.7)
+plt.show() # Mostrar el gráfico
 ```
 
-## ✅ Conclusiones / siguientes pasos
-Esta práctica demuestra habilidades fundamentales en la manipulación de datos con `pandas`, el modelado predictivo con `scikit-learn` y la visualización básica con `matplotlib` en un entorno de desarrollo como Visual Studio Code. Como siguientes pasos, se podría:
-- Ampliar el análisis de datos exploratorio (EDA) para obtener más insights.
-- Evaluar el rendimiento del modelo de regresión lineal con métricas como el R² o el Error Cuadrático Medio (RMSE).
-- Explorar otros tipos de modelos de machine learning para la predicción de precios.
-- Desarrollar visualizaciones más complejas y personalizadas para presentar los resultados.
+## 📁 Estructura del proyecto
+```
+.
+├── .venv/                                       # Entorno virtual de Python (Ignorado por Git)
+├── docs/
+│   └── Practica_3.2_Python_VSCode-Miguel-Jeric-.md # Documento original con la descripción de la práctica
+├── practice_script.py                           # Script principal con el código de la práctica
+└── README.md                                    # Documentación del proyecto (este archivo)
+```
+
+## 🛠️ Tecnologías
+| Herramienta           | Versión/Detalle | Uso en el proyecto                                            |
+| :-------------------- | :-------------- | :------------------------------------------------------------ |
+| `Python`              | 3.x             | Lenguaje de programación principal para el desarrollo de la práctica. |
+| `pandas`              | Última estable  | Manipulación y análisis de datos tabulares, gestión de DataFrames. |
+| `scikit-learn`        | Última estable  | Implementación de algoritmos de Machine Learning, específicamente Regresión Lineal. |
+| `matplotlib`          | Última estable  | Creación de gráficos y visualizaciones de datos.              |
+| `Visual Studio Code`  | N/A             | Entorno de desarrollo integrado (IDE) utilizado para la codificación y depuración. |
+
+## 📚 Contexto formativo o motivación del proyecto
+Este proyecto forma parte de la Práctica 3.2, desarrollada por Miguel Jericó dentro del curso de "Análisis de Datos e IA" impartido por el INAEM. Su propósito es consolidar los conocimientos adquiridos en la gestión de datos, el modelado predictivo básico y la visualización de resultados mediante las herramientas estándar del ecosistema Python, utilizando Visual Studio Code como entorno de desarrollo.
+
+<p align="center">Desarrollado por @migueljerico · 2026</p>
