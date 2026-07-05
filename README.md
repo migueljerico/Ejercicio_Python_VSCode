@@ -174,4 +174,4 @@ plt.show() # Mostrar el gráfico
 ## 📚 Contexto formativo o motivación del proyecto
 Este proyecto forma parte de la Práctica 3.2, desarrollada por Miguel Jericó dentro del curso de "Análisis de Datos e IA" impartido por el INAEM. Su propósito es consolidar los conocimientos adquiridos en la gestión de datos, el modelado predictivo básico y la visualización de resultados mediante las herramientas estándar del ecosistema Python, utilizando Visual Studio Code como entorno de desarrollo.
 
-<p align="center">Desarrollado por @migueljerico · 2026</p>
+<p align="center">Desarrollado por @migueljerico y documentado mediante la app Asistente de IA para Publicar Repositorios · 2026
